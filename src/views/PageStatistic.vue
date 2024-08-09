@@ -77,7 +77,7 @@ const setChartData = () => {
   }
 }
 
-const setChartOptions = () => {
+const setChartOptions = (): any => {
   const documentStyle = getComputedStyle(document.documentElement)
   const textColor = documentStyle.getPropertyValue('--p-text-color')
 
