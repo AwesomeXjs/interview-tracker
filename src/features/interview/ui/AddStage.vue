@@ -2,9 +2,12 @@
 const interview = defineModel('interview')
 const addStage = () => {
   if (interview.value) {
+    // @ts-ignore
     if (!interview.value.stages) {
+      // @ts-ignore
       interview.value.stages = []
     }
+    // @ts-ignore
     interview.value.stages.push({ name: '', date: null, description: '' })
   }
 }

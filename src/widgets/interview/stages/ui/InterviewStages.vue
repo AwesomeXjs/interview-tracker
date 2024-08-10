@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const interview = defineModel('interview')
+const interview = defineModel<any>('interview')
 
 const emits = defineEmits(['removeStage'])
 
