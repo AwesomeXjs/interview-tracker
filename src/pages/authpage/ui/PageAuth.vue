@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { AuthHeader } from '@/widgets/auth'
-import AuthForm from '@/widgets/auth/auth-form/ui/AuthForm.vue'
+import { AuthHeader } from '@/widgets/auth-widgets/auth-header'
+import AuthForm from '@/widgets/auth-widgets/auth-form/ui/AuthForm.vue'
 </script>
 
 <template>

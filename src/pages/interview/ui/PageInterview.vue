@@ -6,7 +6,10 @@ import { useUserStore } from '@/entities/user/model'
 import type { IInterview } from '@/entities/interview/model/interfaces'
 import { AppLoader } from '@/shared/ui/my-components'
 import { getData } from '@/features/interview/model'
-import { Salary, ChoiceResult, InterviewForm, InterviewStages } from '@/widgets/interview'
+import { Salary } from '@/widgets/interview/salary'
+import { ChoiceResult } from '@/widgets/interview/choiceResult'
+import { InterviewForm } from '@/widgets/interview/interview-form'
+import { InterviewStages } from '@/widgets/interview/stages'
 
 const db = getFirestore()
 const userStore = useUserStore()

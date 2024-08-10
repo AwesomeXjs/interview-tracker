@@ -1,3 +1,3 @@
-import InterviewsTable from './InterviewsTable.vue'
+import InterviewsTable from './ui/InterviewsTable.vue'
 
 export { InterviewsTable }

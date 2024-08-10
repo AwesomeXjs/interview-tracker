@@ -29,7 +29,7 @@ export const routes: RouteRecordRaw[] = [
   {
     path: '/auth',
     name: 'Auth',
-    component: () => import('@/pages/auth')
+    component: () => import('@/pages/authpage')
   },
   {
     path: '/interview/:id',
