@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { IInterview } from '@/entities/interview/model/interfaces'
-import AppLoader from '@/shared/ui/my-components/loader/AppLoader.vue'
-import { useFilter } from '@/shared/hooks/useFilter'
+import type { IInterview } from '@/entities/interview/model'
+import { AppLoader } from '@/shared/ui/my-components'
+import { useFilter } from '@/shared/lib'
 import { InterviewsFilter } from '@/features/interview/ui'
 import { InterviewsTable } from '@/widgets/interview/interviews-table'
 

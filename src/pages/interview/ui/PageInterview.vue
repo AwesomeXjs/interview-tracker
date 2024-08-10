@@ -31,6 +31,15 @@ const removeStage = (index: number) => {
   }
 }
 
+const addStage = () => {
+  if (interview.value) {
+    if (!interview.value.stages) {
+      interview.value.stages = []
+    }
+    interview.value.stages.push({ name: '', date: null, description: '' })
+  }
+}
+
 onMounted(async () => await getData(docref, interview, isLoading))
 </script>
 
@@ -53,7 +62,13 @@ onMounted(async () => await getData(docref, interview, isLoading))
           v-model:salary-one-value="interview.salaryFrom"
         />
 
-        <AddStage v-model:interview="interview" />
+        <app-button
+          label="Добавить этап"
+          severity="info"
+          icon="pi pi-plus"
+          class="mb-3"
+          @click="addStage"
+        />
         <InterviewStages v-model:interview="interview" @remove-stage="removeStage" />
         <ChoiceResult v-model:interview="interview" />
         <app-button label="Сохранить" icon="pi pi-save" @click="saveInterview" />
