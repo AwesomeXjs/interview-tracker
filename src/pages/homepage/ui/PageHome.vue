@@ -1,6 +1,9 @@
 <script setup lang="ts">
-import { NewInterviewForm } from '@/widgets/new-interview-form'
-import { AddNewInterview } from '@/features/interview'
+import { AddNewInterview } from '@/features/interview/ui'
+import InterviewForm from '@/widgets/interview/interview-form/ui/InterviewForm.vue'
+import { useInterviewStore } from '@/entities/interview/model'
+
+const interviewStore = useInterviewStore()
 </script>
 
 <template>
@@ -8,7 +11,14 @@ import { AddNewInterview } from '@/features/interview'
     <app-card>
       <template #title>Новое собеседование</template>
       <template #content>
-        <NewInterviewForm />
+        <InterviewForm
+          v-model:company-value="interviewStore.company"
+          v-model:contact-phone-value="interviewStore.contactPhone"
+          v-model:contact-telegram-value="interviewStore.contactTelegram"
+          v-model:hr-name-value="interviewStore.hrName"
+          v-model:vacancy-link-value="interviewStore.vacancyLink"
+          v-model:contact-whats-app-value="interviewStore.contactWhatsApp"
+        />
         <AddNewInterview />
       </template>
     </app-card>

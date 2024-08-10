@@ -9,7 +9,7 @@ const authStore = useAuthStore()
     <div class="text-900 text-3xl font-medium mb-3">Приветствую!</div>
     <span class="text-600 font-medium line-height-3">{{ authStore.subtitleText }}</span>
     <a
-      class="font-medium no-underline ml-2 text-blue-500 cursor-pointer"
+      class="font-medium no-underline ml-2 cursor-pointer authHeaderColor"
       @click="authStore.toggleAuth"
     >
       {{ authStore.linkAccountText }}
@@ -17,4 +17,8 @@ const authStore = useAuthStore()
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.authHeaderColor {
+  color: #34d399;
+}
+</style>

@@ -22,7 +22,7 @@ export const useAuthStore = defineStore('auth', () => {
   })
 
   const linkAccountText = computed<string>(() => {
-    return isLogin.value ? 'Cоздайте сейчас?' : 'Войдите в него'
+    return isLogin.value ? 'Cоздайте сейчас!' : 'Войдите в него'
   })
 
   const submitButtonText = computed<string>(() => {
