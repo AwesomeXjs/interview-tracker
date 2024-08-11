@@ -9,7 +9,6 @@ import { getData } from '@/features/interview/model'
 import { Salary } from '@/widgets/interview/salary'
 import { ChoiceResult } from '@/widgets/interview/choiceResult'
 import { InterviewForm } from '@/widgets/interview/interview-form'
-import { InterviewStages } from '@/widgets/interview/stages'
 
 const db = getFirestore()
 const userStore = useUserStore()
@@ -72,7 +71,33 @@ onMounted(async () => await getData(docref, interview, isLoading))
           class="mb-3"
           @click="addStage"
         />
-        <InterviewStages v-model:interview="interview" @remove-stage="removeStage" />
+        <template v-if="interview.stages">
+          <div v-for="(stage, index) in interview.stages" :key="index" class="interview-stage">
+            <div class="flex flex-column gap-2">
+              <label :for="`stage-name-${index}`">Название этапа</label>
+              <app-input-text class="input mb-3" :id="`stage-name-${index}`" v-model="stage.name" />
+            </div>
+            <div class="flex flex-column gap-2">
+              <label :for="`stage-date-${index}`">Дата прохождения этапа</label>
+              <app-calendar
+                class="input mb-3"
+                :id="`stage-date-${index}`"
+                dateFormat="dd.mm.yy"
+                v-model="stage.date"
+              />
+            </div>
+            <div class="flex flex-column gap-2">
+              <label :for="`stage-description-${index}`">Комментарий</label>
+              <app-textarea
+                :id="`stage-description-${index}`"
+                class="input mb-3"
+                rows="5"
+                v-model="stage.description"
+              />
+            </div>
+            <app-button class="mb-3" severity="danger" label="Удалить этап" @click="removeStage" />
+          </div>
+        </template>
         <ChoiceResult v-model:interview="interview" />
         <app-button label="Сохранить" icon="pi pi-save" @click="saveInterview" />
       </template>

@@ -11,7 +11,7 @@ const isLoading = ref<boolean>(false)
 </script>
 
 <template>
-  <h1>statistic</h1>
+  <h1>Статистика</h1>
   <AppLoader v-if="isLoading" />
   <InterviewsStatistic
     v-model:interviews="interviews"

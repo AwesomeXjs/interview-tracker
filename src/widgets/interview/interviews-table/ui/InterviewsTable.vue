@@ -83,7 +83,9 @@ onMounted(async () => {
     </app-column>
     <app-column header="Пройденные этапы">
       <template #body="slotProps">
-        <span v-if="!slotProps.data.stages">Нет дополнительных этапов</span>
+        <span v-if="!slotProps.data.stages || !slotProps.data.stages.length"
+          >Нет дополнительных этапов</span
+        >
         <div class="interview-stage" v-else>
           <app-badge
             v-for="(stage, i) in slotProps.data.stages"
