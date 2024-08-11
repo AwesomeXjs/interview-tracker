@@ -9,6 +9,7 @@ import ConfirmationService from 'primevue/confirmationservice'
 import Tooltip from 'primevue/tooltip'
 import PrimeVue from 'primevue/config'
 import Aura from '@primevue/themes/aura'
+
 import ToastService from 'primevue/toastservice'
 import { initializeApp } from 'firebase/app'
 
@@ -32,7 +33,11 @@ const app = createApp(App)
 app.use(ToastService)
 app.use(createPinia())
 app.use(router)
-app.use(PrimeVue, { theme: { preset: Aura } })
+app.use(PrimeVue, {
+  theme: {
+    preset: Aura
+  }
+})
 app.use(ConfirmationService)
 app.directive('tooltip', Tooltip)
 
