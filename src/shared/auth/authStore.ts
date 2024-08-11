@@ -7,8 +7,10 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   signInWithPopup,
-  GoogleAuthProvider
+  GoogleAuthProvider,
+  GithubAuthProvider
 } from 'firebase/auth'
+import { useUserStore } from '@/entities/user'
 
 export const useAuthStore = defineStore('auth', () => {
   const email = ref<string>('')
@@ -18,6 +20,7 @@ export const useAuthStore = defineStore('auth', () => {
 
   const router = useRouter()
   const toast = useToast()
+  const userStore = useUserStore()
 
   const toggleAuth = () => {
     isLogin.value = !isLogin.value
@@ -75,6 +78,32 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
+  const signInWithGithub = async (): Promise<void> => {
+    try {
+      const provider = new GithubAuthProvider()
+      await signInWithPopup(getAuth(), provider)
+        .then((result) => {
+          // This gives you a GitHub Access Token. You can use it to access the GitHub API.
+          const credential: any = GithubAuthProvider.credentialFromResult(result)
+        })
+        .catch((error) => {
+          // Handle Errors here.
+          const errorCode = error.code
+          const errorMessage = error.message
+          // The email of the user's account used.
+          const email = error.customData.email
+          // The AuthCredential type that was used.
+          const credential = GithubAuthProvider.credentialFromError(error)
+          // ...
+        })
+      router.push('/')
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toast.add({ severity: 'error', summary: 'Error', detail: error.message, life: 3000 })
+      }
+    }
+  }
+
   const submitForm = async (): Promise<void> => {
     if (isLogin.value) {
       await signIn()
@@ -93,6 +122,7 @@ export const useAuthStore = defineStore('auth', () => {
     toggleAuth,
     linkAccountText,
     subtitleText,
-    signInWithGoogle
+    signInWithGoogle,
+    signInWithGithub
   }
 })

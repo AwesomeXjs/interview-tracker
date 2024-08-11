@@ -26,7 +26,9 @@ const authStore = useAuthStore()
     ></app-button>
   </form>
   <button @click="authStore.signInWithGoogle" class="login-with-google-btn">
-    Sign in with Google
+    Sign in with Google</button
+  ><button @click="authStore.signInWithGithub" class="login-with-google-btn">
+    Sign in with Github
   </button>
 </template>
 
