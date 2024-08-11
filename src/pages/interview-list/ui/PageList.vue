@@ -17,7 +17,6 @@ const isLoading = ref<boolean>(false)
   <app-dialog></app-dialog>
   <div class="flex justify-content-between align-items-center">
     <h1>Список собеседований</h1>
-
     <InterviewsFilter v-model:selected-filter-result="selectedFilterResult" />
   </div>
 

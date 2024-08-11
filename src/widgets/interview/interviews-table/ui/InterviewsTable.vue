@@ -5,6 +5,7 @@ import { useConfirm } from 'primevue/useconfirm'
 import { useUserStore } from '@/entities/user/model'
 import { onMounted } from 'vue'
 import { getAllInterviews } from '@/features/interview/model/getAllInterview'
+import NoInterviewText from '@/shared/ui/my-components/no-interview-text/NoInterviewText.vue'
 
 const isLoading = defineModel('isLoading')
 const filteredInterviews = defineModel<IInterview[] | any>('filteredInterviews')
@@ -39,9 +40,7 @@ onMounted(async () => {
 
 <template>
   <div class="mt-5">
-    <app-inline-message v-if="!isLoading && !filteredInterviews.length"
-      >Нет добавленных собеседований</app-inline-message
-    >
+    <NoInterviewText v-if="!isLoading && !filteredInterviews.length" />
     <app-data-table v-else :value="filteredInterviews">
       <app-column field="company" header="Компания"></app-column>
       <app-column field="hrName" header="HR"></app-column>

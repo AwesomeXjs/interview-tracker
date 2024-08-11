@@ -4,6 +4,7 @@ import { onMounted } from 'vue'
 import { getAllInterviews } from '@/features/interview/model/getAllInterview'
 import { getFirestore } from 'firebase/firestore'
 import { useUserStore } from '@/entities/user/model'
+import NoInterviewText from '@/shared/ui/my-components/no-interview-text/NoInterviewText.vue'
 
 const db = getFirestore()
 const userStore = useUserStore()
@@ -70,7 +71,8 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="chart-wrapper">
+  <NoInterviewText class="no-interview" v-if="!isLoading && !interviews.length" />
+  <div v-else class="chart-wrapper">
     <app-chart type="doughnut" :data="chartData" :options="chartOptions" class="w-30rem" />
   </div>
 </template>
@@ -80,5 +82,8 @@ onMounted(async () => {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.no-interview {
+  margin-top: 25px;
 }
 </style>
