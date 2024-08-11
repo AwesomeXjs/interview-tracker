@@ -10,7 +10,6 @@ import {
   GoogleAuthProvider,
   GithubAuthProvider
 } from 'firebase/auth'
-import { useUserStore } from '@/entities/user'
 
 export const useAuthStore = defineStore('auth', () => {
   const email = ref<string>('')
@@ -77,6 +76,18 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
+  const signInWithGigub = async (): Promise<void> => {
+    try {
+      const provider = new GithubAuthProvider()
+      const { user } = await signInWithPopup(getAuth(), provider)
+      router.push('/')
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toast.add({ severity: 'error', summary: 'Error', detail: error.message, life: 3000 })
+      }
+    }
+  }
+
   const submitForm = async (): Promise<void> => {
     if (isLogin.value) {
       await signIn()
@@ -95,6 +106,7 @@ export const useAuthStore = defineStore('auth', () => {
     toggleAuth,
     linkAccountText,
     subtitleText,
-    signInWithGoogle
+    signInWithGoogle,
+    signInWithGigub
   }
 })
