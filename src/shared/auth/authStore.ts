@@ -2,7 +2,13 @@ import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useToast } from 'primevue/usetoast'
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider
+} from 'firebase/auth'
 
 export const useAuthStore = defineStore('auth', () => {
   const email = ref<string>('')
@@ -57,6 +63,18 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
+  const signInWithGoogle = async (): Promise<void> => {
+    try {
+      const provider = new GoogleAuthProvider()
+      const { user } = await signInWithPopup(getAuth(), provider)
+      router.push('/')
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toast.add({ severity: 'error', summary: 'Error', detail: error.message, life: 3000 })
+      }
+    }
+  }
+
   const submitForm = async (): Promise<void> => {
     if (isLogin.value) {
       await signIn()
@@ -74,6 +92,7 @@ export const useAuthStore = defineStore('auth', () => {
     submitForm,
     toggleAuth,
     linkAccountText,
-    subtitleText
+    subtitleText,
+    signInWithGoogle
   }
 })
